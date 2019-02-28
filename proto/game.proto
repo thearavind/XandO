@@ -1,0 +1,21 @@
+syntax = "proto3";
+package game;
+
+message gameRequestParams {
+  string userId = 1;
+}
+ 
+message gameData {
+  string gameId = 1;
+  string symbol = 2;
+  repeated string gameState = 3;
+  string turn = 4;
+  string result = 5;
+  repeated string players = 6;
+  string winner = 7;
+}
+
+service gameService {
+  rpc requestGameStart(gameRequestParams) returns (gameData) {}
+  rpc updateGameState(stream gameData) returns (stream gameData) {}
+}
